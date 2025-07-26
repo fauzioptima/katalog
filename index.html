@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOP Harian Marketplace</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #f1f8e9);
+      margin: 0;
+      padding: 20px;
+      color: #2c3e50;
+    }
+    h1 {
+      text-align: center;
+      color: #00796b;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: linear-gradient(145deg, #ffffff, #e3f2fd);
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 900px;
+      transition: transform 0.3s ease-in-out;
+    }
+    .card:hover {
+      transform: scale(1.02);
+    }
+    .time {
+      font-weight: bold;
+      color: #1e88e5;
+      font-size: 1.1em;
+    }
+    .title {
+      font-size: 1.4em;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      color: #0d47a1;
+    }
+    .desc {
+      margin-bottom: 12px;
+      font-size: 1em;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    ul li {
+      margin-bottom: 5px;
+      color: #2e7d32;
+    }
+    .section {
+      background-color: #ffecb3;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      color: #e65100;
+      margin-top: 40px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>📒 SOP Harian Pengelolaan Toko Marketplace</h1>
+  <div id="sopContainer"></div>
+
+  <script>
+    const sopData = [
+      {
+        time: "08.00 – 09.00 WIB",
+        title: "📦 Cek & Proses Pesanan",
+        desc: "Login ke dashboard kedua toko. Cek pesanan masuk dari malam sebelumnya dan pagi ini. Periksa stok barang secara fisik / sistem. Cetak invoice/resi. Siapkan barang, packing sesuai standar keamanan. Tempel resi dan pastikan barang siap pickup atau dikirim.",
+        checklist: [
+          "Semua pesanan hari sebelumnya dan hari ini diproses maksimal jam 09.00",
+          "Produk yang habis ditandai stok kosong di marketplace",
+          "Barang yang ready sudah diproses maksimal jam 11.00"
+        ]
+      },
+      {
+        time: "09.00 – 10.00 WIB",
+        title: "Balas Chat & Komentar",
+        desc: "Buka semua pesan masuk dari masing-masing toko. Balas semua pertanyaan customer maksimal 5-10 menit setelah masuk. Prioritaskan pertanyaan soal produk & pengiriman. Gunakan template untuk balasan cepat. Cek komentar & ulasan terbaru, beri tanggapan yang baik.",
+        checklist: [
+          "Semua chat dibalas maksimal 10 menit sejak masuk",
+          "Ulasan negatif ditanggapi dengan sopan",
+          "Ulasan positif di-like / dibalas dengan sopan"
+        ]
+      },
+      {
+        time: "10.00 – 11.00 WIB",
+        title: "Update Stok & Produk",
+        desc: "Cek fisik stok barang. Update ketersediaan stok di kedua marketplace. Upload produk baru (jika ada). Revisi foto, harga, atau deskripsi produk bila diperlukan.",
+        checklist: [
+          "Tidak ada selisih stok online vs fisik",
+          "Produk yang habis disembunyikan / ditandai kosong",
+          "Produk baru diupload bila tersedia"
+        ]
+      },
+      {
+        time: "11.00 – 12.00 WIB",
+        title: "Cek & Optimasi Iklan",
+        desc: "Masuk ke fitur iklan di masing-masing marketplace. Evaluasi performa iklan. Matikan iklan tidak efektif, naikkan anggaran iklan yang bagus. Masukkan produk ke promo / campaign harian jika tersedia.",
+        checklist: [
+          "Anggaran iklan harian tidak melewati batas",
+          "Produk unggulan ikut program promo mingguan",
+          "Minimal 1-2 produk dipromosikan per toko"
+        ]
+      },
+      {
+        time: "12.00 – 13.00 WIB",
+        title: "ISTIRAHAT",
+        desc: "Waktu istirahat karyawan",
+        checklist: []
+      },
+      {
+        time: "13.00 – 14.30 WIB",
+        title: "Packing & Pengiriman Sore",
+        desc: "Cek order baru, packing, input resi manual/otomatis, update status kirim.",
+        checklist: [
+          "Semua pesanan sebelum jam 15.00 diproses hari itu",
+          "Resi masuk sistem sesuai jadwal"
+        ]
+      },
+      {
+        time: "14.30 – 15.30 WIB",
+        title: "Follow-up & Layanan Pelanggan",
+        desc: "Kirim pesan terima kasih, tanggapi ulasan / komplain, follow-up pembeli yang belum checkout.",
+        checklist: [
+          "Pesan follow-up terkirim ke semua pembeli",
+          "Minimal 3 chat \"keranjang\" dibalas manual atau via template"
+        ]
+      },
+      {
+        time: "15.30 – 17.00 WIB",
+        title: "Rekap & Evaluasi Harian",
+        desc: "Rekap total pesanan, catat barang terlaris dan slow moving, input ke spreadsheet, buat catatan restock dan masalah harian.",
+        checklist: [
+          "Semua data transaksi harian sudah tercatat",
+          "Produk best seller dicatat",
+          "Stok yang menipis dicatat",
+          "Catatan masalah hari ini dibuat"
+        ]
+      }
+    ];
+
+    const container = document.getElementById("sopContainer");
+
+    sopData.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <div class="time">⏰ ${item.time}</div>
+        <div class="title">${item.title}</div>
+        <div class="desc">${item.desc}</div>
+        ${item.checklist.length ? '<strong>Checklist:</strong><ul>' + item.checklist.map(i => `<li>${i}</li>`).join('') + '</ul>' : ''}
+      `;
+
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
